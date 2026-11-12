@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TaskTrust — AI-powered freelance project planning, collaboration and milestone payments." />
+  <title>TaskTrust — Plan Smarter. Work Better. Build Trust.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --surface: #ffffff;
+      --ink: #152238;
+      --muted: #64748b;
+      --line: #e7edf4;
+      --blue: #4169e1;
+      --blue-dark: #2852ca;
+      --cyan: #35c6d4;
+      --mint: #dff8f1;
+      --lavender: #eef0ff;
+      --shadow: 0 18px 55px rgba(29, 51, 93, .09);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1160px, calc(100% - 44px)); margin: auto; }
+    .nav-wrap { position: sticky; top: 0; z-index: 20; background: rgba(247,249,252,.88); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(231,237,244,.8); }
+    nav { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 11px; font: 800 21px Manrope, sans-serif; letter-spacing: -.7px; }
+    .brand-mark { width: 36px; height: 36px; display: grid; place-items: center; color: white; border-radius: 12px; background: linear-gradient(135deg, var(--blue), #6f8cff); box-shadow: 0 7px 18px #4169e14a; }
+    .brand-mark svg { width: 21px; }
+    .nav-links { display: flex; gap: 30px; align-items: center; color: #53627a; font-size: 13px; font-weight: 700; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta, .primary-btn { background: var(--blue); color: white; padding: 12px 19px; border-radius: 11px; font-weight: 700; font-size: 13px; box-shadow: 0 8px 18px #4169e12b; transition: .2s; }
+    .nav-cta:hover, .primary-btn:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .hero { padding: 88px 0 75px; overflow: hidden; position: relative; }
+    .hero:before { content:""; position:absolute; width:520px; height:520px; border-radius:50%; background:radial-gradient(circle, #dce6ff 0, #dce6ff00 70%); right:-160px; top:-150px; pointer-events:none; }
+    .hero-grid { display:grid; grid-template-columns: 1.02fr .98fr; gap: 55px; align-items:center; position:relative; }
+    .eyebrow { display:inline-flex; gap:8px; align-items:center; color:var(--blue); background:#edf1ff; border:1px solid #dce4ff; padding:7px 12px; border-radius:30px; font-size:11px; font-weight:800; letter-spacing:.7px; text-transform:uppercase; }
+    .pulse { width:7px; height:7px; background:#35c6a0; border-radius:50%; box-shadow:0 0 0 4px #35c6a022; }
+    h1,h2,h3 { font-family:Manrope,sans-serif; line-height:1.17; letter-spacing:-1.2px; }
+    h1 { font-size:clamp(42px,5.2vw,66px); margin:22px 0 20px; max-width:650px; }
+    h1 span { color:var(--blue); }
+    .hero-copy { color:var(--muted); font-size:17px; max-width:540px; margin:0 0 30px; }
+    .hero-actions { display:flex; gap:13px; align-items:center; flex-wrap:wrap; }
+    .secondary-btn { padding:11px 18px; border:1px solid #dce3ed; border-radius:11px; font-weight:700; font-size:13px; background:white; }
+    .secondary-btn:hover { border-color:var(--blue); color:var(--blue); }
+    .trust-note { margin-top:23px; color:#8491a5; font-size:12px; }
+    .trust-note strong { color:#52627b; }
+    .dashboard { background:#fff; border:1px solid #e7ecf5; border-radius:24px; padding:19px; box-shadow:0 30px 80px rgba(44,68,120,.15); transform:rotate(1.2deg); position:relative; }
+    .dash-top { display:flex; justify-content:space-between; align-items:center; padding:3px 2px 17px; border-bottom:1px solid var(--line); }
+    .dash-title { font:800 13px Manrope; }
+    .avatar-stack { display:flex; align-items:center; }
+    .avatar { width:27px;height:27px;border:2px solid white;border-radius:50%;margin-left:-7px;display:grid;place-items:center;font-size:9px;font-weight:800;color:#35466a;background:#dce7ff; }
+    .avatar:first-child { margin-left:0; background:#ffe5d6; }
+    .avatar:last-child { background:#d9f5ed; }
+    .dash-label { font-size:10px; color:#8a96a9; font-weight:700; text-transform:uppercase; letter-spacing:.7px; margin:17px 0 7px; }
+    .project-name { font:800 17px Manrope; }
+    .project-sub { color:#8a96a9; font-size:11px; margin-top:3px; }
+    .progress-line { height:7px; background:#edf1f7; border-radius:20px; margin:15px 0 6px; overflow:hidden; }
+    .progress-line span { display:block; height:100%; width:68%; background:linear-gradient(90deg,var(--blue),#61cfe0); border-radius:20px; }
+    .progress-meta { display:flex; justify-content:space-between; font-size:10px; color:#7b8799; }
+    .dash-cards { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+    .mini-card { padding:13px; border:1px solid var(--line); border-radius:14px; }
+    .mini-card small { color:#8a96a9; font-size:10px; font-weight:700; }
+    .mini-card strong { display:block; font:800 19px Manrope; margin-top:4px; }
+    .mini-card em { font-style:normal; font-size:10px; color:#23a981; }
+    .task-row { display:flex; align-items:center; gap:10px; padding:11px 0; border-bottom:1px solid #f0f3f8; font-size:11px; }
+    .task-check { width:17px;height:17px;border-radius:6px;background:#e5f8f1;color:#21a77e;display:grid;place-items:center;font-size:10px; }
+    .task-row small { margin-left:auto; color:#8995a7; }
+    .ai-float { position:absolute; right:-20px; bottom:48px; padding:13px 16px; background:#172747; color:#fff; border-radius:15px; box-shadow:var(--shadow); font-size:11px; max-width:190px; transform:rotate(-2deg); }
+    .ai-float b { display:block; color:#77e3d0; margin-bottom:3px; }
+    .stats { padding:22px 0 54px; }
+    .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); background:white; border:1px solid var(--line); border-radius:18px; padding:23px 12px; }
+    .stat { text-align:center; border-right:1px solid var(--line); }
+    .stat:last-child { border:0; }
+    .stat strong { display:block; font:800 23px Manrope; }
+    .stat span { color:#8793a6; font-size:11px; }
+    section.content-section { padding:78px 0; }
+    .section-head { max-width:650px; margin:0 auto 42px; text-align:center; }
+    .section-kicker { color:var(--blue); font-size:11px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; }
+    h2 { font-size:clamp(30px,3.8vw,43px); margin:12px 0; }
+    .section-head p { color:var(--muted); margin:0; font-size:15px; }
+    .feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:17px; }
+    .feature-card { background:white; border:1px solid var(--line); padding:25px; border-radius:18px; transition:.2s; }
+    .feature-card:hover { transform:translateY(-5px); box-shadow:var(--shadow); border-color:#d7e0ff; }
+    .feature-icon { width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:var(--lavender);color:var(--blue);margin-bottom:18px; }
+    .feature-icon svg { width:21px;height:21px; }
+    .feature-card:nth-child(3n+2) .feature-icon { background:var(--mint); color:#159c7d; }
+    .feature-card:nth-child(3n) .feature-icon { background:#fff2e6; color:#d58a36; }
+    .feature-card h3 { font-size:16px; margin:0 0 9px; letter-spacing:-.3px; }
+    .feature-card p { color:var(--muted); font-size:12px; margin:0; line-height:1.7; }
+    .workflow { background:#101e39; color:white; position:relative; overflow:hidden; }
+    .workflow:after { content:"";position:absolute;width:440px;height:440px;border:1px solid #ffffff12;border-radius:50%;right:-130px;top:-230px;box-shadow:0 0 0 50px #ffffff08,0 0 0 100px #ffffff05; }
+    .workflow .section-head p { color:#a8b5cb; }
+    .workflow .section-kicker { color:#79dcca; }
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; position:relative; z-index:1; }
+    .step { padding:22px 18px; border:1px solid #ffffff20; border-radius:16px; background:#ffffff08; }
+    .step-num { color:#7ce0ce; font:800 12px Manrope; }
+    .step h3 { font-size:15px; margin:17px 0 8px; }
+    .step p { color:#a8b5cb; font-size:11px; margin:0; }
+    .build-grid { display:grid; grid-template-columns:1fr 1fr; gap:45px; align-items:center; }
+    .build-copy h2 { margin-top:12px; }
+    .build-copy p { color:var(--muted); font-size:14px; }
+    .check-list { list-style:none; padding:0; margin:23px 0 0; display:grid; gap:13px; }
+    .check-list li { display:flex; align-items:flex-start; gap:10px; color:#53627a; font-size:13px; }
+    .check { flex:0 0 20px; height:20px; display:grid; place-items:center; border-radius:50%; background:#e0f8f0; color:#159c7d; font-size:11px; font-weight:900; }
+    .tech-panel { padding:25px; border:1px solid var(--line); background:white; border-radius:20px; box-shadow:var(--shadow); }
+    .tech-panel h3 { font-size:16px; margin:0 0 17px; }
+    .tech-item { display:flex; align-items:center; gap:13px; padding:13px 0; border-bottom:1px solid var(--line); }
+    .tech-item:last-child { border:0; padding-bottom:0; }
+    .tech-logo { width:37px;height:37px;display:grid;place-items:center;background:#edf1ff;color:var(--blue);border-radius:11px;font:800 11px Manrope; }
+    .tech-item strong { display:block; font-size:12px; }
+    .tech-item small { display:block; color:#8793a6; font-size:10px; }
+    .challenge-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:17px; }
+    .challenge { padding:22px; border-radius:16px; background:#fff; border:1px solid var(--line); }
+    .challenge .number { color:#9aa8bd; font:800 12px Manrope; }
+    .challenge h3 { font-size:15px; margin:13px 0 8px; }
+    .challenge p { color:var(--muted); font-size:12px; margin:0; }
+    .proud { background:linear-gradient(135deg,#edf2ff,#effbf8); }
+    .proud-grid { display:grid; grid-template-columns:1fr 1fr; gap:45px; align-items:center; }
+    .proud-list { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .proud-item { padding:17px; border:1px solid #dfe8f3; background:#ffffffb8; border-radius:14px; font-size:12px; font-weight:700; }
+    .proud-item span { display:block; color:var(--blue); font:800 20px Manrope; margin-bottom:7px; }
+    .quote { background:#172747; color:white; padding:29px; border-radius:20px; }
+    .quote p { font:600 19px/1.5 Manrope; letter-spacing:-.4px; margin:0 0 16px; }
+    .quote small { color:#9eacc2; font-size:11px; }
+    .next-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; }
+    .next-item { display:flex; gap:12px; padding:17px; background:white; border:1px solid var(--line); border-radius:14px; }
+    .next-dot { width:8px;height:8px;flex:0 0 8px;border-radius:50%;background:var(--cyan);margin-top:7px; }
+    .next-item strong { display:block; font-size:12px; margin-bottom:4px; }
+    .next-item span { display:block; color:var(--muted); font-size:11px; }
+    .cta { padding:70px 0; }
+    .cta-box { text-align:center; padding:55px 25px; border-radius:25px; color:white; background:linear-gradient(120deg,#345bd4,#527ce9 60%,#36bfc4); position:relative; overflow:hidden; }
+    .cta-box:before,.cta-box:after { content:"";position:absolute;border:1px solid #ffffff30;border-radius:50%;width:260px;height:260px;top:-160px;left:-60px; }
+    .cta-box:after { left:auto;top:auto;right:-70px;bottom:-190px;width:330px;height:330px; }
+    .cta-box h2 { position:relative; z-index:1; margin:0 0 12px; }
+    .cta-box p { position:relative; z-index:1; color:#e0e9ff; margin:0 auto 24px; max-width:570px; font-size:13px; }
+    .cta-box a { position:relative;z-index:1;display:inline-block;background:white;color:#3159d0;padding:12px 20px;border-radius:11px;font-size:12px;font-weight:800; }
+    footer { padding:27px 0; border-top:1px solid var(--line); color:#8793a6; font-size:11px; }
+    .footer-inner { display:flex;justify-content:space-between;align-items:center;gap:20px; }
+    .footer-brand { color:var(--ink);font:800 14px Manrope; }
+    @media (max-width: 900px) {
+      .hero-grid,.build-grid,.proud-grid { grid-template-columns:1fr; }
+      .hero-grid { gap:50px; }
+      .dashboard { max-width:600px; width:100%; margin:auto; }
+      .feature-grid { grid-template-columns:repeat(2,1fr); }
+      .steps { grid-template-columns:repeat(2,1fr); }
+      .challenge-grid,.next-grid { grid-template-columns:repeat(2,1fr); }
+      .build-grid,.proud-grid { gap:28px; }
+    }
+    @media (max-width: 600px) {
+      .container { width:min(100% - 30px, 1160px); }
+      nav { height:66px; }
+      .nav-links { display:none; }
+      .hero { padding:62px 0 45px; }
+      h1 { font-size:43px; }
+      .hero-copy { font-size:15px; }
+      .dashboard { padding:14px; transform:none; }
+      .ai-float { right:-5px; bottom:35px; }
+      .stats-grid { grid-template-columns:1fr 1fr; row-gap:20px; }
+      .stat:nth-child(2) { border:0; }
+      .stat:nth-child(3),.stat:nth-child(4) { padding-top:16px; border-top:1px solid var(--line); }
+      section.content-section { padding:60px 0; }
+      .feature-grid,.challenge-grid,.next-grid { grid-template-columns:1fr; }
+      .steps { grid-template-columns:1fr 1fr; }
+      .step { padding:17px 14px; }
+      .proud-list { grid-template-columns:1fr 1fr; }
+      .quote p { font-size:17px; }
+      .footer-inner { flex-direction:column; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="nav-wrap">
+    <nav class="container">
+      <a class="brand" href="#home" aria-label="TaskTrust home">
+        <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 9.5 17 19 7.5"/><path d="M12 3h7a2 2 0 0 1 2 2v7"/><path d="M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></span>
+        TaskTrust
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a><a href="#workflow">How it works</a><a href="#story">Our story</a><a href="#future">Roadmap</a>
+      </div>
+      <a class="nav-cta" href="#story">Explore the project ↗</a>
+    </nav>
+  </div>
+
+  <main>
+    <header class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="pulse"></span> AI-powered freelance ecosystem</div>
+          <h1>Plan smarter.<br><span>Work better.</span><br>Build trust.</h1>
+          <p class="hero-copy">A better way for clients and freelancers to turn ideas into clear plans, track meaningful progress, and manage milestone-based payments — all in one place.</p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="#features">Explore features&nbsp; ↗</a>
+            <a class="secondary-btn" href="#workflow">See how it works</a>
+          </div>
+          <div class="trust-note">Built around <strong>clarity, collaboration and trust.</strong></div>
+        </div>
+
+        <div class="dashboard" aria-label="Illustrative TaskTrust project dashboard">
+          <div class="dash-top"><span class="dash-title">Project overview</span><div class="avatar-stack"><span class="avatar">AJ</span><span class="avatar">MK</span><span class="avatar">+2</span></div></div>
+          <div class="dash-label">Active project</div>
+          <div class="project-name">Website redesign</div>
+          <div class="project-sub">Client: Northstar Studio · Due in 12 days</div>
+          <div class="progress-line"><span></span></div>
+          <div class="progress-meta"><span>Project progress</span><strong>68%</strong></div>
+          <div class="dash-cards">
+            <div class="mini-card"><small>Completed tasks</small><strong>17/25</strong><em>↑ On track</em></div>
+            <div class="mini-card"><small>Paid milestones</small><strong>2/3</strong><em>1 awaiting review</em></div>
+          </div>
+          <div class="dash-label">Upcoming tasks</div>
+          <div class="task-row"><span class="task-check">✓</span><span>Finalize homepage layout</span><small>Done</small></div>
+          <div class="task-row"><span class="task-check">✓</span><span>Mobile responsive screens</span><small>Done</small></div>
+          <div class="task-row"><span class="task-check" style="background:#edf1ff;color:#4169e1">↗</span><span>Submit design prototype</span><small>Today</small></div>
+          <div class="ai-float"><b>✦ AI project insight</b>Current progress looks on track. One deliverable is ready for review.</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="stats">
+      <div class="container stats-grid">
+        <div class="stat"><strong>AI-first</strong><span>Project planning</span></div>
+        <div class="stat"><strong>Milestone</strong><span>Based workflows</span></div>
+        <div class="stat"><strong>2-sided</strong><span>Client & freelancer</span></div>
+        <div class="stat"><strong>Sandbox</strong><span>PayPal integration</span></div>
+      </div>
+    </div>
+
+    <section class="content-section" id="features">
+      <div class="container">
+        <div class="section-head"><div class="section-kicker">What TaskTrust does</div><h2>Everything a project needs.<br>All in one trusted space.</h2><p>From the first project brief to the final milestone, TaskTrust helps both sides stay aligned and informed.</p></div>
+        <div class="feature-grid">
+          <article class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1m0-12.8-2.1 2.1m-8.6 8.6-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg></div><h3>AI Project Planner</h3><p>Turns natural-language project descriptions into structured tasks and clear, actionable plans.</p></article>
+          <article class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16M4 12h16M4 19h10"/><circle cx="18" cy="19" r="2"/></svg></div><h3>Smart Milestone Generator</h3><p>Creates milestones with estimated timelines, budgets and deliverables to set expectations early.</p></article>
+          <article class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 6-7"/></svg></div><h3>AI Progress Assistant</h3><p>Summarizes project activity and highlights potential delays that may need attention.</p></article>
+          <article class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"/><path d="m16 3 5 5-9 9-4 1 1-4 9-9Z"/></svg></div><h3>Deliverable Review</h3><p>Helps compare submitted work against the requirements agreed at the start of a project.</p></article>
+          <article class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M20 8v6m3-3h-6"/></svg></div><h3>Client & Freelancer Workspaces</h3><p>Dedicated workflows to manage tasks, deadlines, submissions and milestone approvals.</p></article>
+          <article class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20m-15 5h4"/></svg></div><h3>PayPal & Transaction Tracking</h3><p>PayPal Sandbox-powered milestone payment testing with payment status and transaction history.</p></article>
+          <article class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2"/><path d="M16 3h5v5"/></svg></div><h3>AI Project Assistant</h3><p>An interactive assistant that offers project-related guidance and helps users move forward.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section workflow" id="workflow">
+      <div class="container">
+        <div class="section-head"><div class="section-kicker">A clearer workflow</div><h2>From project brief to completion.</h2><p>TaskTrust connects planning, execution, review and payment in a single project journey.</p></div>
+        <div class="steps">
+          <article class="step"><div class="step-num">01 / DEFINE</div><h3>Describe the project</h3><p>The client explains the project in natural language, including goals and expectations.</p></article>
+          <article class="step"><div class="step-num">02 / PLAN</div><h3>Generate the plan</h3><p>AI helps organize the brief into tasks, milestones, estimated budgets and timelines.</p></article>
+          <article class="step"><div class="step-num">03 / COLLABORATE</div><h3>Track the work</h3><p>Freelancers manage tasks and submit deliverables while clients follow project progress.</p></article>
+          <article class="step"><div class="step-num">04 / COMPLETE</div><h3>Review & pay</h3><p>Deliverables are reviewed against requirements and milestone payment status is tracked.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="story">
+      <div class="container build-grid">
+        <div class="build-copy"><div class="section-kicker">How we built it</div><h2>AI meets practical project workflows.</h2><p>We brought AI capabilities, project management and payment integration together in one centralized platform. AI interprets project requirements and helps generate structured tasks, milestones and timelines. Further AI features support progress summaries and deliverable reviews.</p><p>Dedicated client and freelancer workflows connect project planning with task execution, submissions and milestone completion.</p><ul class="check-list"><li><span class="check">✓</span><span>Natural-language requirements transformed into structured project data.</span></li><li><span class="check">✓</span><span>Separate workflows for clients and freelancers.</span></li><li><span class="check">✓</span><span>PayPal Developer Platform integrated in Sandbox mode for testing.</span></li><li><span class="check">✓</span><span>AI assistance connected to the original project requirements.</span></li></ul></div>
+        <div class="tech-panel"><h3>Core building blocks</h3>
+          <div class="tech-item"><div class="tech-logo">AI</div><div><strong>AI integration</strong><small>Requirement analysis · Planning · Reviews</small></div></div>
+          <div class="tech-item"><div class="tech-logo">API</div><div><strong>Application workflows</strong><small>Project data · Tasks · Milestones</small></div></div>
+          <div class="tech-item"><div class="tech-logo">↗</div><div><strong>PayPal Developer Platform</strong><small>Sandbox payment flow and transaction testing</small></div></div>
+          <div class="tech-item"><div class="tech-logo">UX</div><div><strong>Role-based experience</strong><small>Dedicated client and freelancer dashboards</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" style="background:#f0f3f9">
+      <div class="container">
+        <div class="section-head"><div class="section-kicker">Challenges we ran into</div><h2>Turning complex problems into one smooth flow.</h2><p>Building a connected experience meant solving challenges across AI, payments and application architecture.</p></div>
+        <div class="challenge-grid">
+          <article class="challenge"><div class="number">CHALLENGE 01</div><h3>Making AI outputs useful</h3><p>Natural-language briefs can be ambiguous. We worked to make generated tasks relevant, logically organized and aligned with client expectations.</p></article>
+          <article class="challenge"><div class="number">CHALLENGE 02</div><h3>Connecting milestones & payments</h3><p>Payment statuses needed to fit naturally into the project lifecycle and reflect milestone progress.</p></article>
+          <article class="challenge"><div class="number">CHALLENGE 03</div><h3>Keeping modules consistent</h3><p>Integrating project data, AI responses and deliverable reviews required a consistent source of requirements and project information.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section proud">
+      <div class="container proud-grid">
+        <div><div class="section-kicker">Accomplishments we're proud of</div><h2>A more connected freelance experience.</h2><p style="color:var(--muted);font-size:14px">We are proud to have built a platform that brings AI-powered planning, project collaboration and payment workflows together to address real freelancing challenges.</p><div class="proud-list"><div class="proud-item"><span>01</span>AI-generated project plans</div><div class="proud-item"><span>02</span>Smart milestones & timelines</div><div class="proud-item"><span>03</span>AI progress & deliverable support</div><div class="proud-item"><span>04</span>Client and freelancer workflows</div><div class="proud-item"><span>05</span>PayPal Sandbox integration</div><div class="proud-item"><span>06</span>Unified project experience</div></div></div>
+        <aside class="quote"><p>“The real achievement is not just adding AI or payments. It is bringing the pieces together to make collaboration clearer and trust easier to build.”</p><small>THE IDEA BEHIND TASKTRUST</small></aside>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <div class="section-head"><div class="section-kicker">What we learned</div><h2>Building AI is more than calling a model.</h2><p>We learned to design AI around real user needs, reliable data and complete workflows.</p></div>
+        <div class="feature-grid">
+          <article class="feature-card"><div class="feature-icon">✦</div><h3>Practical AI integration</h3><p>Structuring prompts, interpreting natural-language requirements and generating actionable outputs.</p></article>
+          <article class="feature-card"><div class="feature-icon">⌘</div><h3>Connected application modules</h3><p>Managing API communication and keeping project information consistent across workflows.</p></article>
+          <article class="feature-card"><div class="feature-icon">↗</div><h3>Payment workflows</h3><p>Understanding payment gateway integration, transaction states and milestone-based processes.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="future" style="background:#f0f3f9">
+      <div class="container">
+        <div class="section-head"><div class="section-kicker">What's next</div><h2>Our roadmap for TaskTrust.</h2><p>We want to keep making freelance collaboration more transparent, intelligent and dependable.</p></div>
+        <div class="next-grid">
+          <div class="next-item"><span class="next-dot"></span><div><strong>Production PayPal payments</strong><span>Move from Sandbox testing to a production-ready integration.</span></div></div>
+          <div class="next-item"><span class="next-dot"></span><div><strong>Automated payment release</strong><span>Explore secure approval and milestone release workflows.</span></div></div>
+          <div class="next-item"><span class="next-dot"></span><div><strong>Advanced AI reviews</strong><span>Improve requirement matching and deliverable feedback.</span></div></div>
+          <div class="next-item"><span class="next-dot"></span><div><strong>Smart deadline predictions</strong><span>Use project activity to identify possible delays earlier.</span></div></div>
+          <div class="next-item"><span class="next-dot"></span><div><strong>AI dispute assistance</strong><span>Support fair discussions using requirements, submissions and project history.</span></div></div>
+          <div class="next-item"><span class="next-dot"></span><div><strong>Notifications & messaging</strong><span>Add real-time updates, collaboration and deadline reminders.</span></div></div>
+          <div class="next-item"><span class="next-dot"></span><div><strong>Project analytics</strong><span>Surface insights into productivity, completion and payment history.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container"><div class="cta-box"><h2>Better projects start with trust.</h2><p>TaskTrust brings structure to project planning, clarity to collaboration and transparency to milestone-based payments.</p><a href="#home">Back to top ↑</a></div></div>
+    </section>
+  </main>
+  <footer><div class="container footer-inner"><div class="footer-brand">TaskTrust<span style="color:var(--blue)">.</span></div><div>Plan Smarter. Work Better. Build Trust.</div><div>© 2026 TaskTrust · Project showcase</div></div></footer>
+</body>
+</html>
